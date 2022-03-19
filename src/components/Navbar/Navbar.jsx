@@ -1,11 +1,26 @@
 import React from "react";
 import Container from "../Container";
-import { List, ListItem, FlexContainer, CartButton } from "./Navbar.styled";
+import CartModal from "../CartModal";
+import {
+  List,
+  ListItem,
+  FlexContainer,
+  CartButton,
+  Nav,
+} from "./Navbar.styled";
 class Navbar extends React.Component {
+  state = {
+    isModalOpen: false,
+  };
+
+  toggleModal = () => {
+    this.setState((state) => ({ isModalOpen: !state.isModalOpen }));
+  };
+
   render() {
     return (
-      <nav>
-        <Container>
+      <Container>
+        <Nav>
           <FlexContainer>
             <List>
               <ListItem>Women</ListItem>
@@ -23,12 +38,15 @@ class Navbar extends React.Component {
                 </select>
               </ListItem>
               <ListItem>
-                <CartButton type="button">0</CartButton>
+                <CartButton type="button" onClick={this.toggleModal}>
+                  0
+                </CartButton>
+                {this.state.isModalOpen && <CartModal />}
               </ListItem>
             </List>
           </FlexContainer>
-        </Container>
-      </nav>
+        </Nav>
+      </Container>
     );
   }
 }

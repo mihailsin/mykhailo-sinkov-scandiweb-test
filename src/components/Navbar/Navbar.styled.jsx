@@ -21,4 +21,8 @@ const CartButton = styled.button`
   border-radius: 50%;
 `;
 
-export { List, ListItem, FlexContainer, CartButton };
+const Nav = styled.nav`
+  position: relative;
+`;
+
+export { List, ListItem, FlexContainer, CartButton, Nav };
