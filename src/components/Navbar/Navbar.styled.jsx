@@ -25,4 +25,16 @@ const Nav = styled.nav`
   position: relative;
 `;
 
-export { List, ListItem, FlexContainer, CartButton, Nav };
+const Filter = styled.button`
+  background-color: #ffffff;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+
+  &:focus {
+    color: #5ece7b;
+  }
+`;
+
+export { List, ListItem, FlexContainer, CartButton, Nav, Filter };
