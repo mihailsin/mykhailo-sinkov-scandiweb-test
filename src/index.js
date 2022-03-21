@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import {
   ApolloClient,
@@ -16,21 +18,30 @@ const client = new ApolloClient({
 });
 
 const testQuery = gql`
-  {
-    categories {
+  query ByCategory($cat: String!) {
+    category(input: { title: $cat }) {
       name
+      products {
+        name
+        brand
+        gallery
+      }
     }
   }
 `;
 
-client.query({ query: testQuery }).then((data) => console.log(data));
+client
+  .query({ query: testQuery, variables: { cat: "tech" } })
+  .then((data) => console.log(data));
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,8 +1,11 @@
 import React from "react";
+import { changeFilter } from "../../redux/actions";
+import { connect } from "react-redux";
 import Container from "../Container";
 import CartModal from "../CartModal";
 import { Query } from "@apollo/client/react/components";
-import { gql } from "@apollo/client";
+import { NavLink } from "react-router-dom";
+import queries from "../../queries";
 import {
   List,
   ListItem,
@@ -12,27 +15,15 @@ import {
   Filter,
 } from "./Navbar.styled";
 
-const CURRENCY_QUERY = gql`
-  {
-    currencies {
-      label
-      symbol
-    }
-  }
-`;
-
-const CATEGORIES_QUERY = gql`
-  {
-    categories {
-      name
-    }
-  }
-`;
-
 class Navbar extends React.Component {
   state = {
     currency: null,
     isModalOpen: false,
+  };
+
+  selectFilter = (e) => {
+    console.log(e.target.value);
+    return e.target.value;
   };
 
   toggleModal = () => {
@@ -45,13 +36,20 @@ class Navbar extends React.Component {
         <Nav>
           <FlexContainer>
             <List>
-              <Query query={CATEGORIES_QUERY}>
+              <Query query={queries.CATEGORIES_QUERY}>
                 {({ data, loading }) => {
                   if (loading) return "loading...";
                   return data.categories.map((category, idx) => {
                     return (
                       <ListItem key={idx}>
-                        <Filter>{category.name.toUpperCase()}</Filter>
+                        <Filter
+                          value={category.name}
+                          onClick={(e) =>
+                            this.props.changeFilter(e.target.value)
+                          }
+                        >
+                          {category.name.toUpperCase()}
+                        </Filter>
                       </ListItem>
                     );
                   });
@@ -61,13 +59,14 @@ class Navbar extends React.Component {
             <List>
               <ListItem>
                 <select id="currency" name="currency">
-                  <Query query={CURRENCY_QUERY}>
+                  <Query query={queries.CURRENCY_QUERY}>
                     {({ data, loading }) => {
                       if (loading) return "loading...";
                       return data.currencies.map(({ symbol, label }, idx) => {
                         return (
                           <option key={idx} value={label}>
-                            {symbol}
+                            {symbol} &nbsp;
+                            {label}
                           </option>
                         );
                       });
@@ -89,4 +88,9 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({ filter: state.filter });
+const mapDispatchToProps = () => ({
+  changeFilter,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps())(Navbar);

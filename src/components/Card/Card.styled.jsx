@@ -5,7 +5,7 @@ const CardContainer = styled.div`
   flex-flow: column nowrap;
   border: 1px solid #cccccc;
   justify-content: space-between;
-  width: 250px;
+  width: 100%;
   cursor: pointer;
 `;
 
@@ -13,7 +13,7 @@ const Thumb = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 400px;
 `;
 
 const Img = styled.img`
@@ -28,4 +28,8 @@ const Info = styled.div`
   border-top: 1px solid #cccccc;
 `;
 
-export { CardContainer, Thumb, Info, Img };
+const Item = styled.li`
+  width: 100%;
+`;
+
+export { CardContainer, Thumb, Info, Img, Item };

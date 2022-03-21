@@ -1,11 +1,11 @@
 import React from "react";
-import { CardContainer, Thumb, Info, Img } from "./Card.styled";
+import { CardContainer, Thumb, Info, Img, Item } from "./Card.styled";
 
 class Card extends React.Component {
   render() {
     const { brand, gallery, name } = this.props.product;
     return (
-      <li>
+      <Item>
         <CardContainer>
           <Thumb>
             <Img src={gallery[0]} alt="" width="100%" />
@@ -15,7 +15,7 @@ class Card extends React.Component {
             <p>{brand}</p>
           </Info>
         </CardContainer>
-      </li>
+      </Item>
     );
   }
 }
