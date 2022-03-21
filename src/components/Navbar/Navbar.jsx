@@ -1,5 +1,5 @@
 import React from "react";
-import { changeFilter } from "../../redux/actions";
+import { changeFilter, changeCurrency } from "../../redux/actions";
 import { connect } from "react-redux";
 import Container from "../Container";
 import CartModal from "../CartModal";
@@ -21,7 +21,7 @@ class Navbar extends React.Component {
     isModalOpen: false,
   };
 
-  selectFilter = (e) => {
+  selectHandler = (e) => {
     console.log(e.target.value);
     return e.target.value;
   };
@@ -31,6 +31,7 @@ class Navbar extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <Container>
         <Nav>
@@ -58,7 +59,11 @@ class Navbar extends React.Component {
             </List>
             <List>
               <ListItem>
-                <select id="currency" name="currency">
+                <select
+                  id="currency"
+                  name="currency"
+                  onChange={(e) => this.props.changeCurrency(e.target.value)}
+                >
                   <Query query={queries.CURRENCY_QUERY}>
                     {({ data, loading }) => {
                       if (loading) return "loading...";
@@ -88,9 +93,13 @@ class Navbar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ filter: state.filter });
+const mapStateToProps = (state) => ({
+  currency: state.userOptions.currency,
+  filter: state.userOptions.currency,
+});
 const mapDispatchToProps = () => ({
   changeFilter,
+  changeCurrency,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps())(Navbar);

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { categoryFilterReducer } from "./reducers";
+import { rootReducer } from "./reducers";
 
 const store = configureStore({
   reducer: {
-    filter: categoryFilterReducer,
+    userOptions: rootReducer,
   },
 });
 

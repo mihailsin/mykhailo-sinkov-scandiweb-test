@@ -1,3 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const changeFilter = createAction("categoryFilter/value");
+const changeFilter = createAction("categoryFilter/value");
+const changeCurrency = createAction("currency/value");
+
+export { changeCurrency, changeFilter };

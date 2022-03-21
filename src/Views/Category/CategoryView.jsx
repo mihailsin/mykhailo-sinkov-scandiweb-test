@@ -30,6 +30,6 @@ class CategoryView extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ filter: state.filter });
+const mapStateToProps = (state) => ({ filter: state.userOptions.filter });
 
 export default connect(mapStateToProps, null)(CategoryView);
