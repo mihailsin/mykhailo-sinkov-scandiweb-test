@@ -75,6 +75,36 @@ const queries = {
       }
     }
   `,
+  PRODUCT_QUERY: gql`
+    query ByProduct($prod: String!) {
+      product(id: $prod) {
+        id
+        name
+        inStock
+        gallery
+        description
+        category
+        attributes {
+          id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
+        }
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
+        brand
+      }
+    }
+  `,
 };
 
 export default queries;

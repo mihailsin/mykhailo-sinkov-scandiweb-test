@@ -12,7 +12,7 @@ import {
 import "./index.css";
 import App from "./App";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
 });
