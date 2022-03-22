@@ -7,19 +7,24 @@ import { connect } from "react-redux";
 
 class CategoryView extends React.Component {
   render() {
-    console.log(this.props);
+    console.log(this.props.currency);
     return (
       <>
         <Gallery>
           <Query
-            query={queries.PRODUCTS_BY_CATEGORY_QUERY}
+            query={queries.OPTIONAL_QUERY}
             variables={{ cat: this.props.filter }}
           >
             {({ data, loading }) => {
               if (loading) return "loading...";
               return data.category.products.map(
-                ({ name, brand, gallery }, idx) => {
-                  return <Card key={idx} product={{ name, brand, gallery }} />;
+                ({ name, brand, gallery, prices, id }, idx) => {
+                  return (
+                    <Card
+                      key={idx}
+                      product={{ name, gallery, brand, prices, id }}
+                    />
+                  );
                 }
               );
             }}
@@ -30,6 +35,9 @@ class CategoryView extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ filter: state.userOptions.filter });
+const mapStateToProps = (state) => ({
+  filter: state.userOptions.filter,
+  currency: state.userOptions.currency,
+});
 
 export default connect(mapStateToProps, null)(CategoryView);

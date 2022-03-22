@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Container from "../Container";
 import CartModal from "../CartModal";
 import { Query } from "@apollo/client/react/components";
-import { NavLink } from "react-router-dom";
 import queries from "../../queries";
 import {
   List,
@@ -17,13 +16,7 @@ import {
 
 class Navbar extends React.Component {
   state = {
-    currency: null,
     isModalOpen: false,
-  };
-
-  selectHandler = (e) => {
-    console.log(e.target.value);
-    return e.target.value;
   };
 
   toggleModal = () => {
@@ -95,7 +88,7 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state) => ({
   currency: state.userOptions.currency,
-  filter: state.userOptions.currency,
+  filter: state.userOptions.filter,
 });
 const mapDispatchToProps = () => ({
   changeFilter,

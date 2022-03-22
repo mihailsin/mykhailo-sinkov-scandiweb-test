@@ -42,6 +42,39 @@ const queries = {
       }
     }
   `,
+  OPTIONAL_QUERY: gql`
+    query ByOptions($cat: String! = "all") {
+      category(input: { title: $cat }) {
+        name
+        products {
+          id
+          name
+          inStock
+          gallery
+          description
+          category
+          attributes {
+            id
+            name
+            type
+            items {
+              displayValue
+              value
+              id
+            }
+          }
+          prices {
+            currency {
+              label
+              symbol
+            }
+            amount
+          }
+          brand
+        }
+      }
+    }
+  `,
 };
 
 export default queries;

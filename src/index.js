@@ -30,9 +30,9 @@ const testQuery = gql`
   }
 `;
 
-client
-  .query({ query: testQuery, variables: { cat: "tech" } })
-  .then((data) => console.log(data));
+// client
+//   .query({ query: testQuery, variables: { cat: "tech" } })
+//   .then((data) => console.log(data));
 
 ReactDOM.render(
   <React.StrictMode>
