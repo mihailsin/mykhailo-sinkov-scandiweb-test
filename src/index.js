@@ -37,15 +37,15 @@ const testQuery = gql`
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
             <App />
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </ApolloProvider>
+          </PersistGate>
+        </Provider>
+      </ApolloProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

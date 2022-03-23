@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   CardContainer,
   Thumb,
@@ -14,11 +14,12 @@ import { linkTo } from "../../redux/actions";
 
 class Card extends React.Component {
   render() {
+    console.log(this.props);
     const { brand, gallery, name, prices, id } = this.props.product;
     console.log(this.props.productId);
     return (
       <Item>
-        <Link to={id}>
+        <Link to={`${id}`}>
           <CardContainer onClick={() => this.props.linkTo(id)}>
             <Thumb>
               <Img src={gallery[0]} alt="" width="100%" />

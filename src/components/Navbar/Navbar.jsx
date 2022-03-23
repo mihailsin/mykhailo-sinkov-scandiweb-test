@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { changeFilter, changeCurrency } from "../../redux/actions";
 import { connect } from "react-redux";
 import Container from "../Container";
@@ -13,6 +14,19 @@ import {
   Nav,
   Filter,
 } from "./Navbar.styled";
+
+//Styles for navLinks described here
+
+const linkStyle = {
+  base: {
+    color: "#000000",
+    textDecoration: "none",
+  },
+  active: {
+    color: "#5ECE7B",
+    textDecoration: "underline",
+  },
+};
 
 class Navbar extends React.Component {
   state = {
@@ -35,14 +49,14 @@ class Navbar extends React.Component {
                   return data.categories.map((category, idx) => {
                     return (
                       <ListItem key={idx}>
-                        <Filter
-                          value={category.name}
-                          onClick={(e) =>
-                            this.props.changeFilter(e.target.value)
-                          }
+                        <NavLink
+                          style={linkStyle.base}
+                          activeStyle={linkStyle.active}
+                          to={category.name}
+                          onClick={() => this.props.changeFilter(category.name)}
                         >
                           {category.name.toUpperCase()}
-                        </Filter>
+                        </NavLink>
                       </ListItem>
                     );
                   });
