@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 class CategoryView extends React.Component {
   render() {
-    console.log(this.props.currency);
     return (
       <>
         <Gallery>
@@ -37,7 +36,6 @@ class CategoryView extends React.Component {
 
 const mapStateToProps = (state) => ({
   filter: state.userOptions.filter,
-  currency: state.userOptions.currency,
 });
 
 export default connect(mapStateToProps, null)(CategoryView);

@@ -24,7 +24,6 @@ class Navbar extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Container>
         <Nav>
@@ -55,6 +54,7 @@ class Navbar extends React.Component {
                 <select
                   id="currency"
                   name="currency"
+                  value={this.props.currency}
                   onChange={(e) => this.props.changeCurrency(e.target.value)}
                 >
                   <Query query={queries.CURRENCY_QUERY}>
@@ -62,8 +62,12 @@ class Navbar extends React.Component {
                       if (loading) return "loading...";
                       return data.currencies.map(({ symbol, label }, idx) => {
                         return (
-                          <option key={idx} value={label}>
-                            {symbol} &nbsp;
+                          <option
+                            key={idx}
+                            value={label}
+                            // selected={label === this.props.currency}
+                          >
+                            {/* {symbol} &nbsp; */}
                             {label}
                           </option>
                         );

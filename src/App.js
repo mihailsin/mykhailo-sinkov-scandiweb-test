@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 class App extends React.Component {
   render() {
     const linkToPDP = this.props.productId;
-    console.log(linkToPDP);
     return (
       <>
         <Navbar />

@@ -18,7 +18,6 @@ class ProductDescPage extends React.Component {
   };
 
   setImage = (e) => {
-    console.log(e.target.src);
     this.setState({ image: e.target.src });
   };
 
