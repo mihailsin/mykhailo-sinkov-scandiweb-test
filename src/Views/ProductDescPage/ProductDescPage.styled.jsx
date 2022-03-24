@@ -32,10 +32,17 @@ const MainImgContainer = styled.div`
   border: 1px solid black;
   margin-left: 20px;
 `;
+
+const ProductOrderContainer = styled.div`
+  margin-left: 20px;
+  max-width: 700px;
+  overflow: auto;
+`;
 export {
   PreviewImgContainer,
   ImgWrapper,
   Img,
   FlexContainer,
   MainImgContainer,
+  ProductOrderContainer,
 };

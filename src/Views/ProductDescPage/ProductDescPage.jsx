@@ -11,6 +11,7 @@ import {
   Img,
   FlexContainer,
   MainImgContainer,
+  ProductOrderContainer,
 } from "./ProductDescPage.styled";
 
 const sanitizer = dompurify.sanitize;
@@ -18,7 +19,6 @@ const sanitizer = dompurify.sanitize;
 class ProductDescPage extends React.Component {
   state = {
     image: null,
-    attributes: null,
   };
 
   setImage = (e) => {
@@ -34,13 +34,11 @@ class ProductDescPage extends React.Component {
       .then((data) =>
         this.setState({
           image: data.data.product.gallery[0],
-          attributes: data.data.product.attributes,
         })
       );
   }
 
   render() {
-    console.log(this.state.attributes);
     return (
       <>
         <Container>
@@ -62,39 +60,58 @@ class ProductDescPage extends React.Component {
                   <MainImgContainer>
                     <Img src={this.state.image} alt="" />
                   </MainImgContainer>
-                  <div>
-                    <h2>{data.product.name}</h2>
-                    <h3>{data.product.brand}</h3>
-                    {data.product.attributes.map((attrib, idx) => (
-                      <p key={idx}>{attrib.name}:</p>
-                    ))}
-                    <div>
-                      {data.product.attributes.map((attrib) =>
-                        attrib.items.map((item, idx) => (
-                          <button key={idx} type="button">
-                            {item.value}
-                          </button>
-                        ))
-                      )}
-                    </div>
-                    <p>PRICE:</p>
-                    {data.product.prices.map(({ amount, currency }, idx) => {
-                      if (currency.label === this.props.currency) {
-                        return (
-                          <p key={idx}>
-                            {amount} {currency.symbol}
-                          </p>
-                        );
-                      }
-                    })}
-                    <button type="submit">ADD TO CART</button>
+                  <ProductOrderContainer>
+                    <form>
+                      <h2>{data.product.name}</h2>
+                      <h3>{data.product.brand}</h3>
+                      <div>
+                        {data.product.attributes.map((attribute, idx) => {
+                          return (
+                            <div key={idx}>
+                              <h4>{attribute.name}</h4>
+                              <div>
+                                {attribute.items.map((item) => {
+                                  if (attribute.name === "Color") {
+                                    return (
+                                      <button
+                                        type="button"
+                                        swatchcolor={item.value}
+                                        key={item.id}
+                                      >
+                                        COLOR
+                                      </button>
+                                    );
+                                  } else
+                                    return (
+                                      <button type="button" key={item.value}>
+                                        {item.displayValue}
+                                      </button>
+                                    );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <p>PRICE:</p>
+                      {data.product.prices.map(({ amount, currency }, idx) => {
+                        if (currency.label === this.props.currency) {
+                          return (
+                            <p key={idx}>
+                              {amount} {currency.symbol}
+                            </p>
+                          );
+                        }
+                      })}
+                      <button type="submit">ADD TO CART</button>
 
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: sanitizer(data.product.description),
-                      }}
-                    ></p>
-                  </div>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: sanitizer(data.product.description),
+                        }}
+                      ></p>
+                    </form>
+                  </ProductOrderContainer>
                 </FlexContainer>
               );
             }}
