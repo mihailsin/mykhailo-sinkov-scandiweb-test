@@ -38,6 +38,43 @@ const ProductOrderContainer = styled.div`
   max-width: 700px;
   overflow: auto;
 `;
+
+const ColorSelectOption = styled.span`
+  display: inline-block;
+  background-color: ${(props) => props.swatchcolor};
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+`;
+const AttributeSelectOption = styled.button`
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  background-color: #fff;
+  cursor: pointer;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+  &:hover,
+  :focus {
+    background-color: #000;
+    color: #fff;
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 200px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #5ece7b;
+`;
+
 export {
   PreviewImgContainer,
   ImgWrapper,
@@ -45,4 +82,7 @@ export {
   FlexContainer,
   MainImgContainer,
   ProductOrderContainer,
+  AttributeSelectOption,
+  SubmitButton,
+  ColorSelectOption,
 };

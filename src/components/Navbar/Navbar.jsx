@@ -14,6 +14,7 @@ import {
   Nav,
   Filter,
 } from "./Navbar.styled";
+import { Backdrop } from "../CartModal/CartModal.styled";
 
 //Styles for navLinks described here
 

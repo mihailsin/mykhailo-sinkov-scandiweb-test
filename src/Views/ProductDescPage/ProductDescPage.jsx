@@ -12,6 +12,9 @@ import {
   FlexContainer,
   MainImgContainer,
   ProductOrderContainer,
+  AttributeSelectOption,
+  SubmitButton,
+  ColorSelectOption,
 } from "./ProductDescPage.styled";
 
 const sanitizer = dompurify.sanitize;
@@ -73,19 +76,19 @@ class ProductDescPage extends React.Component {
                                 {attribute.items.map((item) => {
                                   if (attribute.name === "Color") {
                                     return (
-                                      <button
-                                        type="button"
+                                      <ColorSelectOption
                                         swatchcolor={item.value}
                                         key={item.id}
-                                      >
-                                        COLOR
-                                      </button>
+                                      />
                                     );
                                   } else
                                     return (
-                                      <button type="button" key={item.value}>
+                                      <AttributeSelectOption
+                                        type="button"
+                                        key={item.value}
+                                      >
                                         {item.displayValue}
-                                      </button>
+                                      </AttributeSelectOption>
                                     );
                                 })}
                               </div>
@@ -103,7 +106,7 @@ class ProductDescPage extends React.Component {
                           );
                         }
                       })}
-                      <button type="submit">ADD TO CART</button>
+                      <SubmitButton type="submit">ADD TO CART</SubmitButton>
 
                       <p
                         dangerouslySetInnerHTML={{

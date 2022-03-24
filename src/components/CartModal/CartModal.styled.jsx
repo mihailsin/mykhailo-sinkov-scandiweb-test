@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
 const RelativeContainer = styled.div`
-  background-color: rgba(255, 255, 128, 0.5);
-  height: 200px;
-  width: 100px;
+  border: 1px solid #000;
+  background-color: #fff;
+  height: 540px;
+  width: 325px;
   position: absolute;
   right: 0;
   top: 100%;
 `;
 
-export { RelativeContainer };
+const Backdrop = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+`;
+
+export { RelativeContainer, Backdrop };
