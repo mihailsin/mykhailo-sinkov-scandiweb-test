@@ -45,6 +45,7 @@ class ProductDescPage extends React.Component {
     return (
       <>
         <Container>
+          {/* <h1>PDP Page</h1> */}
           <Query
             query={queries.PRODUCT_QUERY}
             variables={{ prod: this.props.productId }}

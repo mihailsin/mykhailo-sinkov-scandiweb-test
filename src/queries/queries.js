@@ -76,7 +76,7 @@ const queries = {
     }
   `,
   PRODUCT_QUERY: gql`
-    query ByProduct($prod: String!) {
+    query ByProduct($prod: String! = "all") {
       product(id: $prod) {
         id
         name

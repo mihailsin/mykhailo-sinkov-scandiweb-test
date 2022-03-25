@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "./Gallery.styled";
 import Container from "../Container";
+import { withRouter } from "react-router-dom";
 class Gallery extends React.Component {
   render() {
     return (
@@ -11,4 +12,4 @@ class Gallery extends React.Component {
   }
 }
 
-export default Gallery;
+export default withRouter(Gallery);

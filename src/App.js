@@ -13,8 +13,11 @@ class App extends React.Component {
       <>
         <Navbar />
         <Switch>
+          <Route
+            component={ProductDescPage}
+            path={`/${this.props.productId}`}
+          />
           <Route component={CategoryView} path="/:category" exact />
-          <Route component={ProductDescPage} path="/:product" />
         </Switch>
       </>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   CardContainer,
   Thumb,
@@ -15,6 +15,7 @@ import { linkTo } from "../../redux/actions";
 class Card extends React.Component {
   render() {
     const { brand, gallery, name, prices, id } = this.props.product;
+    console.log(this.props.match);
     return (
       <Item>
         <Link to={id}>
@@ -51,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
   linkTo,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps())(Card);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps())(Card));
