@@ -8,14 +8,13 @@ import { connect } from "react-redux";
 
 class App extends React.Component {
   render() {
-    const linkToPDP = this.props.productId;
-    const linkToCategory = this.props.filter;
+    console.log(this.props.productId);
     return (
       <>
         <Navbar />
         <Switch>
-          <Route component={CategoryView} path={`/${linkToCategory}`} />
-          <Route component={ProductDescPage} path={`/${linkToPDP}`} />
+          <Route component={CategoryView} path="/:category" exact />
+          <Route component={ProductDescPage} path="/:product" />
         </Switch>
       </>
     );

@@ -43,7 +43,7 @@ const queries = {
     }
   `,
   OPTIONAL_QUERY: gql`
-    query ByOptions($cat: String! = "all") {
+    query ByOptions($cat: String!) {
       category(input: { title: $cat }) {
         name
         products {
