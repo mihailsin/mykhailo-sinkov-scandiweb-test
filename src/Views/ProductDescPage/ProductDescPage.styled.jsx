@@ -66,6 +66,48 @@ const AttributeSelectOption = styled.button`
   }
 `;
 
+const CustomRadio = styled.label`
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    background-color: ${(props) => props.swatchcolor};
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: transform 500ms ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    border: none;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: -36px;
+    border-radius: 50%;
+  }
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+`;
+
+const RadioButton = styled.input`
+  appearance: none;
+  position: absolute;
+  &:checked + ${CustomRadio}::before {
+    transform: scale(1.5);
+    transition: transform 500ms ease-in-out;
+    border-radius: 50%;
+  }
+`;
+
 const SubmitButton = styled.button`
   width: 200px;
   height: 50px;
@@ -85,4 +127,6 @@ export {
   AttributeSelectOption,
   SubmitButton,
   ColorSelectOption,
+  RadioButton,
+  CustomRadio,
 };

@@ -15,6 +15,8 @@ import {
   AttributeSelectOption,
   SubmitButton,
   ColorSelectOption,
+  RadioButton,
+  CustomRadio,
 } from "./ProductDescPage.styled";
 
 const sanitizer = dompurify.sanitize;
@@ -74,13 +76,29 @@ class ProductDescPage extends React.Component {
                             <div key={idx}>
                               <h4>{attribute.name}</h4>
                               <div>
-                                {attribute.items.map((item) => {
+                                {attribute.items.map((item, idx) => {
                                   if (attribute.name === "Color") {
                                     return (
-                                      <ColorSelectOption
-                                        swatchcolor={item.value}
-                                        key={item.id}
-                                      />
+                                      <React.Fragment key={idx}>
+                                        <RadioButton
+                                          onClick={(e) =>
+                                            console.log(e.target.value)
+                                          }
+                                          id={item.id}
+                                          type="radio"
+                                          name="color"
+                                          value={item.displayValue}
+                                        />
+                                        <CustomRadio
+                                          swatchcolor={item.value}
+                                          htmlFor={item.id}
+                                        />
+                                      </React.Fragment>
+
+                                      // <ColorSelectOption
+                                      //   swatchcolor={item.value}
+                                      //   key={item.id}
+                                      // />
                                     );
                                   } else
                                     return (
