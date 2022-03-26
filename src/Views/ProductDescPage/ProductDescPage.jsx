@@ -5,6 +5,7 @@ import { Query } from "@apollo/client/react/components";
 import queries from "../../queries";
 import Container from "../../components/Container";
 import { client } from "../..";
+import { addProductInCart } from "../../redux/actions";
 import {
   PreviewImgContainer,
   ImgWrapper,
@@ -12,9 +13,7 @@ import {
   FlexContainer,
   MainImgContainer,
   ProductOrderContainer,
-  AttributeSelectOption,
   SubmitButton,
-  ColorSelectOption,
   RadioButton,
   CustomRadio,
 } from "./ProductDescPage.styled";
@@ -22,12 +21,22 @@ import {
 const sanitizer = dompurify.sanitize;
 
 class ProductDescPage extends React.Component {
-  state = {
-    image: null,
-  };
+  state = {};
 
   setImage = (e) => {
     this.setState({ image: e.target.src });
+  };
+
+  selectAttribute = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+    this.props.addProductInCart(this.state);
+    e.target.reset();
   };
 
   componentDidMount() {
@@ -39,15 +48,14 @@ class ProductDescPage extends React.Component {
       .then((data) =>
         this.setState({
           image: data.data.product.gallery[0],
+          orderedProductName: data.data.product.name,
         })
       );
   }
-
   render() {
     return (
       <>
         <Container>
-          {/* <h1>PDP Page</h1> */}
           <Query
             query={queries.PRODUCT_QUERY}
             variables={{ prod: this.props.productId }}
@@ -67,7 +75,7 @@ class ProductDescPage extends React.Component {
                     <Img src={this.state.image} alt="" />
                   </MainImgContainer>
                   <ProductOrderContainer>
-                    <form>
+                    <form onSubmit={this.submitHandler}>
                       <h2>{data.product.name}</h2>
                       <h3>{data.product.brand}</h3>
                       <div>
@@ -81,33 +89,34 @@ class ProductDescPage extends React.Component {
                                     return (
                                       <React.Fragment key={idx}>
                                         <RadioButton
-                                          onClick={(e) =>
-                                            console.log(e.target.value)
-                                          }
+                                          onClick={this.selectAttribute}
                                           id={item.id}
                                           type="radio"
-                                          name="color"
+                                          name={attribute.name}
                                           value={item.displayValue}
+                                          required
                                         />
                                         <CustomRadio
                                           swatchcolor={item.value}
                                           htmlFor={item.id}
                                         />
                                       </React.Fragment>
-
-                                      // <ColorSelectOption
-                                      //   swatchcolor={item.value}
-                                      //   key={item.id}
-                                      // />
                                     );
                                   } else
                                     return (
-                                      <AttributeSelectOption
-                                        type="button"
-                                        key={item.value}
-                                      >
-                                        {item.displayValue}
-                                      </AttributeSelectOption>
+                                      <React.Fragment key={idx}>
+                                        <label>
+                                          <input
+                                            type="radio"
+                                            name={attribute.name}
+                                            id={item.id}
+                                            value={item.displayValue}
+                                            onClick={this.selectAttribute}
+                                            required
+                                          />
+                                          {item.displayValue}
+                                        </label>
+                                      </React.Fragment>
                                     );
                                 })}
                               </div>
@@ -149,4 +158,8 @@ const mapStateToProps = (state) => ({
   currency: state.userOptions.currency,
 });
 
-export default connect(mapStateToProps, null)(ProductDescPage);
+const mapDispatchToProps = () => ({
+  addProductInCart,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps())(ProductDescPage);

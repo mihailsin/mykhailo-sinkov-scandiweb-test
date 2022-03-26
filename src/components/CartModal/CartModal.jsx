@@ -1,20 +1,43 @@
 import React from "react";
 import { RelativeContainer } from "./CartModal.styled";
+import { connect } from "react-redux";
 
 class CartModal extends React.Component {
   render() {
+    const products = this.props.products;
+    console.log(products);
+    products.map((product) => console.log(product));
+
     return (
       <RelativeContainer>
-        <h3>My Bag</h3>
-        <div>here would be item</div>
-        <p>total</p>
-        <div>
-          <button>VIEW BAG</button>
-          <button>CHECK OUT</button>
-        </div>
+        {products.map((product) => {
+          if (
+            Object.keys(product) === "orderedProductName" ||
+            Object.keys(product) === "image"
+          ) {
+            return (
+              <>
+                <h3>{product.orderedProductName}</h3>;
+              </>
+            );
+          } else
+            return (
+              <>
+                <p>{product}</p>
+                <div>
+                  <button>VIEW BAG</button>
+                  <button>CHECK OUT</button>
+                </div>
+              </>
+            );
+        })}
       </RelativeContainer>
     );
   }
 }
 
-export default CartModal;
+const mapStateToProps = (state) => ({
+  products: state.userOptions.productsInCart,
+});
+
+export default connect(mapStateToProps, null)(CartModal);

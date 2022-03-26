@@ -39,17 +39,6 @@ const ProductOrderContainer = styled.div`
   overflow: auto;
 `;
 
-const ColorSelectOption = styled.span`
-  display: inline-block;
-  background-color: ${(props) => props.swatchcolor};
-  border: 1px solid black;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  &:not(:first-child) {
-    margin-left: 10px;
-  }
-`;
 const AttributeSelectOption = styled.button`
   width: 100px;
   height: 50px;
@@ -126,7 +115,6 @@ export {
   ProductOrderContainer,
   AttributeSelectOption,
   SubmitButton,
-  ColorSelectOption,
   RadioButton,
   CustomRadio,
 };

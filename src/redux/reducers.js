@@ -1,5 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { changeFilter, changeCurrency, linkTo } from "./actions";
+import {
+  changeFilter,
+  changeCurrency,
+  linkTo,
+  addProductInCart,
+} from "./actions";
 import { combineReducers } from "@reduxjs/toolkit";
 
 const categoryFilterReducer = createReducer("all", {
@@ -14,10 +19,15 @@ const linkReducer = createReducer("#", {
   [linkTo]: (state, action) => action.payload,
 });
 
+const cartReducer = createReducer([], {
+  [addProductInCart]: (state, action) => [...state, action.payload],
+});
+
 const rootReducer = combineReducers({
   filter: categoryFilterReducer,
   currency: currencyReducer,
   productId: linkReducer,
+  productsInCart: cartReducer,
 });
 
 export { rootReducer };
