@@ -2,7 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import Container from "../../components/Container";
 import { removeProductFromCart } from "../../redux/actions";
-import { ItemContainer, AttributesContainer, Swatch } from "./Cart.styled";
+import {
+  ItemContainer,
+  AttributesContainer,
+  Swatch,
+  RemoveButton,
+  Header,
+  ItemCounterContainer,
+  CounterButton,
+  ItemQuantityChip,
+  InteractiveContainer,
+  ImageContainer,
+} from "./Cart.styled";
 class Cart extends React.Component {
   state = {};
   render() {
@@ -11,6 +22,7 @@ class Cart extends React.Component {
     return (
       <Container>
         <div>
+          <Header>CART</Header>
           {products.map((product, idx) => {
             return (
               <ItemContainer key={idx}>
@@ -30,25 +42,27 @@ class Cart extends React.Component {
                     }
                   })}
                 </AttributesContainer>
-                <div>
-                  <img
-                    key={idx}
-                    src={product.image}
-                    width="200"
-                    alt="product"
-                  />
-                  <button
-                    key={idx}
-                    onClick={() =>
-                      this.props.removeProductFromCart(
-                        product.orderedProductName
-                      )
-                    }
-                    type="button"
-                  >
-                    Remove from Cart
-                  </button>
-                </div>
+
+                <InteractiveContainer key={idx}>
+                  <ItemCounterContainer>
+                    <CounterButton type="button">+</CounterButton>
+                    <ItemQuantityChip>0</ItemQuantityChip>
+                    <CounterButton type="button">-</CounterButton>
+                  </ItemCounterContainer>
+                  <ImageContainer>
+                    <img src={product.image} width="200" alt="product" />
+                    <RemoveButton
+                      onClick={() =>
+                        this.props.removeProductFromCart(
+                          product.orderedProductName
+                        )
+                      }
+                      type="button"
+                    >
+                      Remove from Cart
+                    </RemoveButton>
+                  </ImageContainer>
+                </InteractiveContainer>
               </ItemContainer>
             );
           })}
