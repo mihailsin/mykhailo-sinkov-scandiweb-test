@@ -49,7 +49,12 @@ class ProductDescPage extends React.Component {
         this.setState({
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
-          orderedProductPrice: data.data.product.c,
+          Price: data.data.product.prices.map(({ amount, currency }) => {
+            if (currency.label === this.props.currency) {
+              return `${amount}${currency.symbol}`;
+            }
+            return null;
+          }),
         })
       );
   }

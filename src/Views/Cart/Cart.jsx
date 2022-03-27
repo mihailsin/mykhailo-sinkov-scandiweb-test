@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Container from "../../components/Container";
+import { removeProductFromCart } from "../../redux/actions";
 class Cart extends React.Component {
   state = {};
   render() {
@@ -9,31 +10,43 @@ class Cart extends React.Component {
     return (
       <Container>
         <div>
-          {products.map((product) => {
+          {products.map((product, idx) => {
             return (
-              <div>
+              <div key={idx}>
                 {Object.keys(product).map((key, idx) => {
                   if (
                     !omittedKeys.includes(key) &&
                     key !== "orderedProductName"
                   ) {
                     return (
-                      <h3 key={idx}>
+                      <p key={idx}>
                         {key}: {product[key]}
-                      </h3>
+                      </p>
                     );
                   }
                   if (key === "orderedProductName") {
-                    return <h1 key={idx}>{product[key]}</h1>;
+                    return <h3 key={idx}>{product[key]}</h3>;
                   }
                   if (key === "image") {
                     return (
-                      <>
-                        <img src={product[key]} width="200" alt="product" />
-                      </>
+                      <img
+                        key={idx}
+                        src={product[key]}
+                        width="200"
+                        alt="product"
+                      />
                     );
                   }
                 })}
+                <button
+                  key={idx}
+                  onClick={() =>
+                    this.props.removeProductFromCart(product.orderedProductName)
+                  }
+                  type="button"
+                >
+                  Remove from Cart
+                </button>
               </div>
             );
           })}
@@ -45,5 +58,8 @@ class Cart extends React.Component {
 const mapStateToProps = (state) => ({
   products: state.userOptions.productsInCart,
 });
+const mapDispatchToProps = () => ({
+  removeProductFromCart,
+});
 
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps())(Cart);

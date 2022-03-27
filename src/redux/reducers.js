@@ -4,6 +4,7 @@ import {
   changeCurrency,
   linkTo,
   addProductInCart,
+  removeProductFromCart,
 } from "./actions";
 import { combineReducers } from "@reduxjs/toolkit";
 
@@ -21,6 +22,8 @@ const linkReducer = createReducer("#", {
 
 const cartReducer = createReducer([], {
   [addProductInCart]: (state, action) => [...state, action.payload],
+  [removeProductFromCart]: (state, action) =>
+    state.filter((product) => product.orderedProductName !== action.payload),
 });
 
 const rootReducer = combineReducers({
