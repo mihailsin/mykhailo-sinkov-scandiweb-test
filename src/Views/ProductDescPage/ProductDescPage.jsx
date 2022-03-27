@@ -49,6 +49,7 @@ class ProductDescPage extends React.Component {
         this.setState({
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
+          orderedProductPrice: data.data.product.c,
         })
       );
   }
