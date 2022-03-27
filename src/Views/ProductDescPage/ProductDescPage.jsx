@@ -49,7 +49,7 @@ class ProductDescPage extends React.Component {
         this.setState({
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
-          Price: data.data.product.prices.map(({ amount, currency }) => {
+          price: data.data.product.prices.map(({ amount, currency }) => {
             if (currency.label === this.props.currency) {
               return `${amount}${currency.symbol}`;
             }
@@ -99,7 +99,7 @@ class ProductDescPage extends React.Component {
                                           id={item.id}
                                           type="radio"
                                           name={attribute.name}
-                                          value={item.displayValue}
+                                          value={item.value}
                                           required
                                         />
                                         <CustomRadio

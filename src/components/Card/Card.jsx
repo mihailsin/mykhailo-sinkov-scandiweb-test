@@ -15,7 +15,6 @@ import { linkTo } from "../../redux/actions";
 class Card extends React.Component {
   render() {
     const { brand, gallery, name, prices, id } = this.props.product;
-    console.log(this.props.match);
     return (
       <Item>
         <Link to={id}>

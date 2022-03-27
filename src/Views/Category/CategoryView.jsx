@@ -24,8 +24,6 @@ class CategoryView extends React.Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.match.url);
-    console.log(this.props.match.url);
     if (prevProps.match.url !== this.props.match.url) {
       const response = await client.query({
         query: queries.OPTIONAL_QUERY,
@@ -44,7 +42,6 @@ class CategoryView extends React.Component {
     this.setState({ data: [] });
   }
   render() {
-    console.log(this.props.match.params.category);
     return (
       <>
         <Gallery>

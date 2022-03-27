@@ -5,13 +5,10 @@ import { Link } from "react-router-dom";
 class CartModal extends React.Component {
   render() {
     const products = this.props.products;
-    console.log(products);
-    products.map((product) => console.log(product));
-
     return (
       <RelativeContainer>
-        {products.map((product, idx) => {
-          console.log(Object.keys(product));
+        {/* {products.map((product, idx) => {
+         
           if (Object.keys(product) === "image") return <h3>image</h3>;
           else
             return (
@@ -21,7 +18,7 @@ class CartModal extends React.Component {
                 </p>
               </React.Fragment>
             );
-        })}
+        })} */}
         <div>
           <button>
             <Link to="/cart">VIEW BAG</Link>
