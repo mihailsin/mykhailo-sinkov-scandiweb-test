@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import AddToCartIcon from "../AddToCartIcon/AddToCartIcon";
 import {
   CardContainer,
   Thumb,
   Info,
   Img,
   Item,
-  AmountParagraph,
+  PriceParagraph,
   TextParagraph,
+  HiddenCartButton,
 } from "./Card.styled";
 import { linkTo } from "../../redux/actions";
 
@@ -17,7 +19,7 @@ class Card extends React.Component {
     const { brand, gallery, name, prices, id } = this.props.product;
     return (
       <Item>
-        <Link to={id}>
+        <Link style={{ textDecoration: "none" }} to={id}>
           <CardContainer onClick={() => this.props.linkTo(id)}>
             <Thumb>
               <Img src={gallery[0]} alt="" width="100%" />
@@ -28,15 +30,18 @@ class Card extends React.Component {
               {prices.map((price) => {
                 if (price.currency.label === this.props.currency) {
                   return (
-                    <AmountParagraph key={price.amount}>
+                    <PriceParagraph key={price.amount}>
                       {price.amount} {price.currency.symbol}
-                    </AmountParagraph>
+                    </PriceParagraph>
                   );
                 }
               })}
             </Info>
           </CardContainer>
         </Link>
+        <HiddenCartButton onClick={() => console.log("!")} type="button">
+          <AddToCartIcon />
+        </HiddenCartButton>
       </Item>
     );
   }

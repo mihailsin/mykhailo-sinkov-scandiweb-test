@@ -12,10 +12,9 @@ import {
   FlexContainer,
   CartButton,
   Nav,
-  Filter,
 } from "./Navbar.styled";
-import { Backdrop } from "../CartModal/CartModal.styled";
-
+import Logo from "../Logo";
+import CartModalIcon from "../CartModalIcon";
 //Styles for navLinks described here
 
 const linkStyle = {
@@ -64,6 +63,7 @@ class Navbar extends React.Component {
                 }}
               </Query>
             </List>
+            <Logo />
             <List>
               <ListItem>
                 <select
@@ -93,7 +93,7 @@ class Navbar extends React.Component {
               </ListItem>
               <ListItem>
                 <CartButton type="button" onClick={this.toggleModal}>
-                  0
+                  <CartModalIcon />
                 </CartButton>
                 {this.state.isModalOpen && <CartModal />}
               </ListItem>

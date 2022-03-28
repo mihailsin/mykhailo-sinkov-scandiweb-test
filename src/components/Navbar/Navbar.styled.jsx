@@ -18,7 +18,9 @@ const FlexContainer = styled.div`
 `;
 
 const CartButton = styled.button`
-  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
 `;
 
 const Nav = styled.nav`

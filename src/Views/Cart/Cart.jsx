@@ -29,9 +29,11 @@ class Cart extends React.Component {
                 <AttributesContainer>
                   <h3 key={idx}>{product.orderedProductName}</h3>
                   <h4>Price: {product.price}</h4>
-                  <div>
-                    Color: <Swatch swatchcolor={product.Color} />
-                  </div>
+                  {product.Color && (
+                    <div>
+                      Color: <Swatch swatchcolor={product.Color} />
+                    </div>
+                  )}
                   {Object.keys(product).map((key, idx) => {
                     if (!omittedKeys.includes(key)) {
                       return (
