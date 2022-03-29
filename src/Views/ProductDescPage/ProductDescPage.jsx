@@ -53,7 +53,6 @@ class ProductDescPage extends React.Component {
             if (currency.label === this.props.currency) {
               return `${amount}${currency.symbol}`;
             }
-            return null;
           }),
         })
       );

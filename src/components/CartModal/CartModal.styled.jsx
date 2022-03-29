@@ -62,6 +62,7 @@ const AttributesContainer = styled.div`
 `;
 
 const Swatch = styled.span`
+  border: 1px solid #111;
   display: block;
   width: 50px;
   height: 20px;

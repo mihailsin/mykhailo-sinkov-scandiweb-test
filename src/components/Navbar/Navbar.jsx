@@ -12,6 +12,7 @@ import {
   FlexContainer,
   CartButton,
   Nav,
+  Chip,
 } from "./Navbar.styled";
 import Logo from "../Logo";
 import CartModalIcon from "../CartModalIcon";
@@ -93,6 +94,7 @@ class Navbar extends React.Component {
               </ListItem>
               <ListItem>
                 <CartButton type="button" onClick={this.toggleModal}>
+                  <Chip>{this.props.products.length}</Chip>
                   <CartModalIcon />
                 </CartButton>
                 {this.state.isModalOpen && <CartModal />}
@@ -108,6 +110,7 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => ({
   currency: state.userOptions.currency,
   filter: state.userOptions.filter,
+  products: state.userOptions.productsInCart,
 });
 const mapDispatchToProps = () => ({
   changeFilter,

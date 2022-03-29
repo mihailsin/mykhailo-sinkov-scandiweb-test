@@ -15,6 +15,7 @@ import {
 } from "./CartModal.styled";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeProductFromCart } from "../../redux/actions";
 class CartModal extends React.Component {
   render() {
     const products = this.props.products;
@@ -82,5 +83,8 @@ class CartModal extends React.Component {
 const mapStateToProps = (state) => ({
   products: state.userOptions.productsInCart,
 });
+const mapDispatchToProps = () => ({
+  removeProductFromCart,
+});
 
-export default connect(mapStateToProps, null)(CartModal);
+export default connect(mapStateToProps, mapDispatchToProps())(CartModal);

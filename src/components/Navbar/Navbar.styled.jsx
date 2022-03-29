@@ -21,6 +21,19 @@ const CartButton = styled.button`
   border: none;
   background-color: #fff;
   cursor: pointer;
+  position: relative;
+`;
+
+const Chip = styled.span`
+  color: #fff;
+  position: absolute;
+  top: -5px;
+  right: 0;
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #111;
 `;
 
 const Nav = styled.nav`
@@ -39,4 +52,4 @@ const Filter = styled.button`
   }
 `;
 
-export { List, ListItem, FlexContainer, CartButton, Nav, Filter };
+export { List, ListItem, FlexContainer, CartButton, Nav, Filter, Chip };

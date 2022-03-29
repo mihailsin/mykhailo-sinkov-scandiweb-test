@@ -6,13 +6,21 @@ import queries from "../../queries";
 import { connect } from "react-redux";
 import { client } from "../..";
 import { Link } from "react-router-dom";
+import OrderModal from "../../components/OrderModal";
 
 class CategoryView extends React.Component {
   state = {
     data: [],
+    showOrderModal: false,
   };
 
   controller = new AbortController();
+
+  toggleOrderModal = () => {
+    this.setState((state) => ({
+      showOrderModal: !state.showOrderModal,
+    }));
+  };
 
   async componentDidMount() {
     const response = await client.query({
@@ -42,12 +50,17 @@ class CategoryView extends React.Component {
     this.setState({ data: [] });
   }
   render() {
+    const { showOrderModal } = this.state;
     return (
       <>
         <Gallery>
           {this.state.data.map(({ name, gallery, brand, prices, id }, idx) => {
             return (
-              <Card key={idx} product={{ name, gallery, brand, prices, id }} />
+              <Card
+                key={idx}
+                product={{ name, gallery, brand, prices, id }}
+                togglemodal={this.toggleOrderModal}
+              />
             );
           })}
           {/* <Query
@@ -70,6 +83,10 @@ class CategoryView extends React.Component {
             }}
           </Query> */}
         </Gallery>
+
+        {showOrderModal && (
+          <OrderModal togglemodal={this.toggleOrderModal}></OrderModal>
+        )}
       </>
     );
   }
@@ -77,6 +94,7 @@ class CategoryView extends React.Component {
 
 const mapStateToProps = (state) => ({
   filter: state.userOptions.filter,
+  productId: state.userOptions.productId,
 });
 
 export default connect(mapStateToProps, null)(CategoryView);

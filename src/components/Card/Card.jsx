@@ -17,6 +17,8 @@ import { linkTo } from "../../redux/actions";
 class Card extends React.Component {
   render() {
     const { brand, gallery, name, prices, id } = this.props.product;
+    const toggleOrderModal = this.props.togglemodal;
+
     return (
       <Item>
         <Link style={{ textDecoration: "none" }} to={id}>
@@ -39,7 +41,13 @@ class Card extends React.Component {
             </Info>
           </CardContainer>
         </Link>
-        <HiddenCartButton onClick={() => console.log("!")} type="button">
+        <HiddenCartButton
+          onClick={() => {
+            toggleOrderModal();
+            this.props.linkTo(id);
+          }}
+          type="button"
+        >
           <AddToCartIcon />
         </HiddenCartButton>
       </Item>
