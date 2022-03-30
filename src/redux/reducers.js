@@ -23,7 +23,7 @@ const linkReducer = createReducer("#", {
 const cartReducer = createReducer([], {
   [addProductInCart]: (state, action) => [...state, action.payload],
   [removeProductFromCart]: (state, action) =>
-    state.filter((product) => product.orderedProductName !== action.payload),
+    state.filter((product) => product.uniqueId !== action.payload),
 });
 
 const rootReducer = combineReducers({

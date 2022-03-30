@@ -18,7 +18,13 @@ class Cart extends React.Component {
   state = {};
   render() {
     const products = this.props.products;
-    const omittedKeys = ["image", "orderedProductName", "price", "Color"];
+    const omittedKeys = [
+      "image",
+      "orderedProductName",
+      "price",
+      "Color",
+      "uniqueId",
+    ];
     return (
       <Container>
         <div>
@@ -55,9 +61,7 @@ class Cart extends React.Component {
                     <img src={product.image} width="200" alt="product" />
                     <RemoveButton
                       onClick={() =>
-                        this.props.removeProductFromCart(
-                          product.orderedProductName
-                        )
+                        this.props.removeProductFromCart(product.uniqueId)
                       }
                       type="button"
                     >

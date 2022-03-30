@@ -6,6 +6,7 @@ import queries from "../../queries";
 import { connect } from "react-redux";
 import { addProductInCart } from "../../redux/actions";
 import { client } from "../..";
+import { nanoid } from "@reduxjs/toolkit";
 import {
   PreviewImgContainer,
   ImgWrapper,
@@ -48,6 +49,7 @@ class OrderModal extends React.Component {
       })
       .then((data) =>
         this.setState({
+          uniqueId: nanoid(10),
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
           price: data.data.product.prices.map(({ amount, currency }) => {

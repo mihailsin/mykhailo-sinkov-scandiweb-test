@@ -19,7 +19,13 @@ import { removeProductFromCart } from "../../redux/actions";
 class CartModal extends React.Component {
   render() {
     const products = this.props.products;
-    const omittedKeys = ["image", "orderedProductName", "price", "Color"];
+    const omittedKeys = [
+      "image",
+      "orderedProductName",
+      "price",
+      "Color",
+      "uniqueId",
+    ];
     return (
       <RelativeContainer>
         <div>
@@ -55,9 +61,7 @@ class CartModal extends React.Component {
                     <img src={product.image} width="100" alt="product" />
                     <RemoveButton
                       onClick={() =>
-                        this.props.removeProductFromCart(
-                          product.orderedProductName
-                        )
+                        this.props.removeProductFromCart(product.uniqueId)
                       }
                       type="button"
                     >

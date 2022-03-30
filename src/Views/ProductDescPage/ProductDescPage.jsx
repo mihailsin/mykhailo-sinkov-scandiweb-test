@@ -17,6 +17,7 @@ import {
   RadioButton,
   CustomRadio,
 } from "./ProductDescPage.styled";
+import { nanoid } from "nanoid";
 
 const sanitizer = dompurify.sanitize;
 
@@ -47,6 +48,7 @@ class ProductDescPage extends React.Component {
       })
       .then((data) =>
         this.setState({
+          uniqueId: nanoid(10),
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
           price: data.data.product.prices.map(({ amount, currency }) => {
@@ -58,6 +60,8 @@ class ProductDescPage extends React.Component {
       );
   }
   render() {
+    const productsInCart = this.props.productsInCart;
+    console.log(productsInCart);
     return (
       <>
         <Container>
@@ -161,6 +165,7 @@ class ProductDescPage extends React.Component {
 const mapStateToProps = (state) => ({
   productId: state.userOptions.productId,
   currency: state.userOptions.currency,
+  productsInCart: state.userOptions.productsInCart,
 });
 
 const mapDispatchToProps = () => ({
