@@ -16,10 +16,15 @@ const CardContainer = styled.div`
 `;
 
 const Thumb = styled.div`
+  @media screen and (max-width: 1024px) {
+    height: 200px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 350px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Img = styled.img`

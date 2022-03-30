@@ -1,6 +1,8 @@
 import React from "react";
 import Gallery from "../../components/Gallery";
 import Card from "../../components/Card";
+import Container from "../../components/Container";
+import { Header } from "./CategoryView.styled";
 import { Query } from "@apollo/client/react/components";
 import queries from "../../queries";
 import { connect } from "react-redux";
@@ -53,6 +55,9 @@ class CategoryView extends React.Component {
     const { showOrderModal } = this.state;
     return (
       <>
+        <Container>
+          <Header>{this.props.filter.toUpperCase()}</Header>
+        </Container>
         <Gallery>
           {this.state.data.map(({ name, gallery, brand, prices, id }, idx) => {
             return (

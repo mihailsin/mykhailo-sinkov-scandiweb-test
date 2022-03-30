@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Container from "../../components/Container";
-import { removeProductFromCart } from "../../redux/actions";
+import {
+  removeProductFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../../redux/actions";
 import {
   ItemContainer,
   AttributesContainer,
@@ -15,7 +19,16 @@ import {
   ImageContainer,
 } from "./Cart.styled";
 class Cart extends React.Component {
-  state = {};
+  decrementProductsQuantity = (id, quantity) => {
+    const decrement = this.props.decrementQuantity;
+    if (quantity > 1) {
+      decrement(id);
+    } else
+      alert(
+        "quantity can not be less then 1! if you want to get rid of it - remove product!"
+      );
+  };
+
   render() {
     const products = this.props.products;
     const omittedKeys = [
@@ -24,6 +37,7 @@ class Cart extends React.Component {
       "price",
       "Color",
       "uniqueId",
+      "quantity",
     ];
     return (
       <Container>
@@ -53,9 +67,26 @@ class Cart extends React.Component {
 
                 <InteractiveContainer key={idx}>
                   <ItemCounterContainer>
-                    <CounterButton type="button">+</CounterButton>
-                    <ItemQuantityChip>0</ItemQuantityChip>
-                    <CounterButton type="button">-</CounterButton>
+                    <CounterButton
+                      type="button"
+                      onClick={() =>
+                        this.props.incrementQuantity(product.uniqueId)
+                      }
+                    >
+                      +
+                    </CounterButton>
+                    <ItemQuantityChip>{product.quantity}</ItemQuantityChip>
+                    <CounterButton
+                      type="button"
+                      onClick={() =>
+                        this.decrementProductsQuantity(
+                          product.uniqueId,
+                          product.quantity
+                        )
+                      }
+                    >
+                      -
+                    </CounterButton>
                   </ItemCounterContainer>
                   <ImageContainer>
                     <img src={product.image} width="200" alt="product" />
@@ -82,6 +113,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = () => ({
   removeProductFromCart,
+  incrementQuantity,
+  decrementQuantity,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps())(Cart);

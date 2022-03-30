@@ -16,8 +16,11 @@ import {
   SubmitButton,
   RadioButton,
   CustomRadio,
+  Div,
+  ProductName,
 } from "./ProductDescPage.styled";
 import { nanoid } from "nanoid";
+import { Wrapper } from "../../components/Container/Container.styled";
 
 const sanitizer = dompurify.sanitize;
 
@@ -49,6 +52,7 @@ class ProductDescPage extends React.Component {
       .then((data) =>
         this.setState({
           uniqueId: nanoid(10),
+          quantity: 1,
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
           price: data.data.product.prices.map(({ amount, currency }) => {
@@ -63,7 +67,7 @@ class ProductDescPage extends React.Component {
     const productsInCart = this.props.productsInCart;
     console.log(productsInCart);
     return (
-      <>
+      <Div>
         <Container>
           <Query
             query={queries.PRODUCT_QUERY}
@@ -81,11 +85,11 @@ class ProductDescPage extends React.Component {
                     ))}
                   </PreviewImgContainer>
                   <MainImgContainer>
-                    <Img src={this.state.image} alt="" />
+                    <Img src={this.state.image} alt="product" />
                   </MainImgContainer>
                   <ProductOrderContainer>
                     <form onSubmit={this.submitHandler}>
-                      <h2>{data.product.name}</h2>
+                      <ProductName>{data.product.name}</ProductName>
                       <h3>{data.product.brand}</h3>
                       <div>
                         {data.product.attributes.map((attribute, idx) => {
@@ -157,7 +161,7 @@ class ProductDescPage extends React.Component {
             }}
           </Query>
         </Container>
-      </>
+      </Div>
     );
   }
 }

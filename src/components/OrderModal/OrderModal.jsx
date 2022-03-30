@@ -50,6 +50,7 @@ class OrderModal extends React.Component {
       .then((data) =>
         this.setState({
           uniqueId: nanoid(10),
+          quantity: 1,
           image: data.data.product.gallery[0],
           orderedProductName: data.data.product.name,
           price: data.data.product.prices.map(({ amount, currency }) => {

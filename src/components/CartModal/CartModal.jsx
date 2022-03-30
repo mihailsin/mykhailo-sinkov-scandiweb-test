@@ -15,8 +15,21 @@ import {
 } from "./CartModal.styled";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeProductFromCart } from "../../redux/actions";
+import {
+  removeProductFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../../redux/actions";
 class CartModal extends React.Component {
+  decrementProductsQuantity = (id, quantity) => {
+    const decrement = this.props.decrementQuantity;
+    if (quantity > 1) {
+      decrement(id);
+    } else
+      alert(
+        "quantity can not be less then 1! if you want to get rid of it - remove product!"
+      );
+  };
   render() {
     const products = this.props.products;
     const omittedKeys = [
@@ -25,6 +38,7 @@ class CartModal extends React.Component {
       "price",
       "Color",
       "uniqueId",
+      "quantity",
     ];
     return (
       <RelativeContainer>
@@ -53,9 +67,26 @@ class CartModal extends React.Component {
 
                 <InteractiveContainer key={idx}>
                   <ItemCounterContainer>
-                    <CounterButton type="button">+</CounterButton>
-                    <ItemQuantityChip>0</ItemQuantityChip>
-                    <CounterButton type="button">-</CounterButton>
+                    <CounterButton
+                      type="button"
+                      onClick={() =>
+                        this.props.incrementQuantity(product.uniqueId)
+                      }
+                    >
+                      +
+                    </CounterButton>
+                    <ItemQuantityChip>{product.quantity}</ItemQuantityChip>
+                    <CounterButton
+                      type="button"
+                      onClick={() =>
+                        this.decrementProductsQuantity(
+                          product.uniqueId,
+                          product.quantity
+                        )
+                      }
+                    >
+                      -
+                    </CounterButton>
                   </ItemCounterContainer>
                   <ImageContainer>
                     <img src={product.image} width="100" alt="product" />
@@ -89,6 +120,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = () => ({
   removeProductFromCart,
+  incrementQuantity,
+  decrementQuantity,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps())(CartModal);

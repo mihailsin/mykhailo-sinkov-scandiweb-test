@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const Div = styled.div`
+  margin-top: 80px;
+`;
+
 const FlexContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -8,7 +12,7 @@ const FlexContainer = styled.div`
 const PreviewImgContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  max-height: 720px;
+  max-height: 600px;
   overflow: auto;
 `;
 
@@ -27,8 +31,12 @@ const Img = styled.img`
 `;
 
 const MainImgContainer = styled.div`
-  height: 720px;
-  width: 720px;
+  @media screen and (max-width: 1024px) {
+    height: 400px;
+    width: 400px;
+  }
+  height: 600px;
+  width: 600px;
   border: 1px solid black;
   margin-left: 20px;
 `;
@@ -37,6 +45,10 @@ const ProductOrderContainer = styled.div`
   margin-left: 20px;
   max-width: 700px;
   overflow: auto;
+`;
+
+const ProductName = styled.h2`
+  margin-top: 0px;
 `;
 
 const AttributeSelectOption = styled.button`
@@ -117,4 +129,6 @@ export {
   SubmitButton,
   RadioButton,
   CustomRadio,
+  Div,
+  ProductName,
 };

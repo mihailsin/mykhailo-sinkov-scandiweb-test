@@ -4,6 +4,7 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
+  padding-left: 0px;
 `;
 
 const ListItem = styled.li`
