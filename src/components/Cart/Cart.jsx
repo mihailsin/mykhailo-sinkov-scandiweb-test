@@ -1,30 +1,24 @@
 import React from "react";
-import {
-  RelativeContainer,
-  ItemContainer,
-  AttributesContainer,
-  Swatch,
-  RemoveButton,
-  ItemCounterContainer,
-  CounterButton,
-  ItemQuantityChip,
-  InteractiveContainer,
-  ImageContainer,
-  ItemTitle,
-  ItemPrice,
-  ButtonsContainer,
-  Button,
-  SwatchContainer,
-  AttributeParagraph,
-} from "./CartModal.styled";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import Container from "../Container";
 import {
   removeProductFromCart,
   incrementQuantity,
   decrementQuantity,
 } from "../../redux/actions";
-class CartModal extends React.Component {
+import {
+  ItemContainer,
+  AttributesContainer,
+  Swatch,
+  RemoveButton,
+  Header,
+  ItemCounterContainer,
+  CounterButton,
+  ItemQuantityChip,
+  InteractiveContainer,
+  ImageContainer,
+} from "./Cart.styled";
+class Cart extends React.Component {
   decrementProductsQuantity = (id, quantity) => {
     const decrement = this.props.decrementQuantity;
     if (quantity > 1) {
@@ -34,6 +28,7 @@ class CartModal extends React.Component {
         "quantity can not be less then 1! if you want to get rid of it - remove product!"
       );
   };
+
   render() {
     const products = this.props.products;
     const omittedKeys = [
@@ -45,35 +40,29 @@ class CartModal extends React.Component {
       "quantity",
     ];
     return (
-      <RelativeContainer>
-        <ButtonsContainer>
-          <Button>
-            <Link to="/cart">VIEW BAG</Link>
-          </Button>
-          <Button>CHECK OUT</Button>
-        </ButtonsContainer>
+      <Container>
         <div>
+          <Header>CART</Header>
           {products.map((product, idx) => {
             return (
               <ItemContainer key={idx}>
                 <AttributesContainer>
-                  <ItemTitle key={idx}>{product.orderedProductName}</ItemTitle>
+                  <h3 key={idx}>{product.orderedProductName}</h3>
+                  <h4>Price: {product.price}</h4>
                   {product.Color && (
-                    <SwatchContainer>
-                      <span>Color &nbsp;</span>{" "}
-                      <Swatch swatchcolor={product.Color} />
-                    </SwatchContainer>
+                    <div>
+                      Color: <Swatch swatchcolor={product.Color} />
+                    </div>
                   )}
                   {Object.keys(product).map((key, idx) => {
                     if (!omittedKeys.includes(key)) {
                       return (
-                        <AttributeParagraph key={idx}>
+                        <p key={idx}>
                           {key}: {product[key]}
-                        </AttributeParagraph>
+                        </p>
                       );
                     }
                   })}
-                  <ItemPrice>Price: {product.price}</ItemPrice>
                 </AttributesContainer>
 
                 <InteractiveContainer key={idx}>
@@ -100,7 +89,7 @@ class CartModal extends React.Component {
                     </CounterButton>
                   </ItemCounterContainer>
                   <ImageContainer>
-                    <img src={product.image} width="100" alt="product" />
+                    <img src={product.image} width="200" alt="product" />
                     <RemoveButton
                       onClick={() =>
                         this.props.removeProductFromCart(product.uniqueId)
@@ -115,11 +104,10 @@ class CartModal extends React.Component {
             );
           })}
         </div>
-      </RelativeContainer>
+      </Container>
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   products: state.userOptions.productsInCart,
 });
@@ -129,4 +117,4 @@ const mapDispatchToProps = () => ({
   decrementQuantity,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps())(CartModal);
+export default connect(mapStateToProps, mapDispatchToProps())(Cart);
