@@ -109,6 +109,53 @@ const RadioButton = styled.input`
   }
 `;
 
+///////////
+
+const CustomLabel = styled.label`
+  cursor: pointer;
+
+  &::before {
+    content: "${(props) => props.content}";
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70px;
+    height: 40px;
+
+    background-color: #fff;
+    border: 1px solid black;
+
+    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+  }
+
+  /* &::after {
+    content: "";
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    border: none;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: -36px;
+  } */
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+`;
+
+const CustomInput = styled.input`
+  appearance: none;
+  position: absolute;
+  &:checked + ${CustomLabel}::before {
+    background-color: #111;
+    color: #fff;
+    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+  }
+`;
+
 const SubmitButton = styled.button`
   width: 200px;
   height: 50px;
@@ -131,4 +178,6 @@ export {
   CustomRadio,
   Div,
   ProductName,
+  CustomInput,
+  CustomLabel,
 };

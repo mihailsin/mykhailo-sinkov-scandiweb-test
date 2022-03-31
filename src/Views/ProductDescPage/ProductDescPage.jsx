@@ -18,9 +18,10 @@ import {
   CustomRadio,
   Div,
   ProductName,
+  CustomInput,
+  CustomLabel,
 } from "./ProductDescPage.styled";
 import { nanoid } from "nanoid";
-import { Wrapper } from "../../components/Container/Container.styled";
 
 const sanitizer = dompurify.sanitize;
 
@@ -90,7 +91,7 @@ class ProductDescPage extends React.Component {
                   <ProductOrderContainer>
                     <form onSubmit={this.submitHandler}>
                       <ProductName>{data.product.name}</ProductName>
-                      <h3>{data.product.brand}</h3>
+                      <h4>{data.product.brand}</h4>
                       <div>
                         {data.product.attributes.map((attribute, idx) => {
                           return (
@@ -118,17 +119,18 @@ class ProductDescPage extends React.Component {
                                   } else
                                     return (
                                       <React.Fragment key={idx}>
-                                        <label>
-                                          <input
-                                            type="radio"
-                                            name={attribute.name}
-                                            id={item.id}
-                                            value={item.displayValue}
-                                            onClick={this.selectAttribute}
-                                            required
-                                          />
-                                          {item.displayValue}
-                                        </label>
+                                        <CustomInput
+                                          type="radio"
+                                          name={attribute.name}
+                                          id={attribute.id + item.id}
+                                          value={item.displayValue}
+                                          onClick={this.selectAttribute}
+                                          required
+                                        />
+                                        <CustomLabel
+                                          content={item.displayValue}
+                                          htmlFor={attribute.id + item.id}
+                                        />
                                       </React.Fragment>
                                     );
                                 })}
