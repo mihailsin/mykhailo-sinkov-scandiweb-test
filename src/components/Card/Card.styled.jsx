@@ -25,12 +25,23 @@ const Thumb = styled.div`
   height: 350px;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 `;
 
 const Img = styled.img`
   width: 100%;
   height: 100%;
   flex-shrink: 0;
+`;
+
+const ProductImg = styled.div`
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background-image: url(${(props) => props.image});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 `;
 
 const Info = styled.div`
@@ -73,6 +84,7 @@ const HiddenCartButton = styled.button`
   padding: 0;
   height: auto;
   width: auto;
+  z-index: 3;
 `;
 
 const Item = styled.li`
@@ -95,4 +107,5 @@ export {
   PriceParagraph,
   TextParagraph,
   HiddenCartButton,
+  ProductImg,
 };

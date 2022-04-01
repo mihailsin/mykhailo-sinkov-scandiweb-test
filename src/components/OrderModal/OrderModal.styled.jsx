@@ -7,9 +7,11 @@ const Backdrop = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 const Modal = styled.div`
+  padding: 20px 0px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -25,9 +27,13 @@ const CloseButton = styled.button`
   cursor: pointer;
   top: 20px;
   right: 20px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+
+  border: none;
+  background-color: transparent;
+  &:hover,
+  :focus {
+    color: #dd0000;
+  }
 `;
 
 export { Backdrop, Modal, CloseButton };

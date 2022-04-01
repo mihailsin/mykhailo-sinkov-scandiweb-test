@@ -59,15 +59,17 @@ class CategoryView extends React.Component {
           <Header>{this.props.filter.toUpperCase()}</Header>
         </Container>
         <Gallery>
-          {this.state.data.map(({ name, gallery, brand, prices, id }, idx) => {
-            return (
-              <Card
-                key={idx}
-                product={{ name, gallery, brand, prices, id }}
-                togglemodal={this.toggleOrderModal}
-              />
-            );
-          })}
+          {this.state.data.map(
+            ({ name, gallery, brand, prices, id, inStock }, idx) => {
+              return (
+                <Card
+                  key={idx}
+                  product={{ name, gallery, brand, prices, id, inStock }}
+                  togglemodal={this.toggleOrderModal}
+                />
+              );
+            }
+          )}
           {/* <Query
             query={queries.OPTIONAL_QUERY}
             variables={{ cat: this.props.match.params.category }}

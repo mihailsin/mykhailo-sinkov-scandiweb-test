@@ -11,21 +11,33 @@ import {
   PriceParagraph,
   TextParagraph,
   HiddenCartButton,
+  ProductImg,
 } from "./Card.styled";
+import { PaleBackdrop } from "../NotInStockPic/NotInStockPic.styled";
 import { linkTo } from "../../redux/actions";
 
 class Card extends React.Component {
   render() {
-    const { brand, gallery, name, prices, id } = this.props.product;
+    const { brand, gallery, name, prices, id, inStock } = this.props.product;
     const toggleOrderModal = this.props.togglemodal;
 
     return (
       <Item>
         <Link style={{ textDecoration: "none" }} to={id}>
           <CardContainer onClick={() => this.props.linkTo(id)}>
-            <Thumb>
-              <Img src={gallery[0]} alt="" width="100%" />
-            </Thumb>
+            {inStock && (
+              <Thumb>
+                <ProductImg image={gallery[0]} />
+              </Thumb>
+            )}
+            {!inStock && (
+              <Thumb>
+                <PaleBackdrop>
+                  <h2>OUT OF STOCK</h2>
+                </PaleBackdrop>
+                <ProductImg image={gallery[0]} />
+              </Thumb>
+            )}
             <Info>
               <TextParagraph>{name}</TextParagraph>
               <TextParagraph>{brand}</TextParagraph>

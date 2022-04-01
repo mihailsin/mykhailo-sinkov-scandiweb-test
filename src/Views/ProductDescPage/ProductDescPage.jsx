@@ -129,7 +129,7 @@ class ProductDescPage extends React.Component {
                                         />
                                         <CustomLabel
                                           content={item.displayValue}
-                                          htmlFor={attribute.id + item.id}
+                                          htmlFor={attribute.id + item.id} // because attribute id's from backend repeated ("yes" "no")
                                         />
                                       </React.Fragment>
                                     );

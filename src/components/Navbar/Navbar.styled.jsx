@@ -4,11 +4,15 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
-  padding-left: 0px;
+  padding-left: 5px;
+  margin: 0px;
+  height: 100%;
 `;
 
 const ListItem = styled.li`
-  margin-left: 16px;
+  &:not(:first-child) {
+    margin-left: 16px;
+  }
 `;
 
 const FlexContainer = styled.div`

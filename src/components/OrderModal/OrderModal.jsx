@@ -17,6 +17,9 @@ import {
   SubmitButton,
   RadioButton,
   CustomRadio,
+  ProductName,
+  CustomInput,
+  CustomLabel,
 } from "../../Views/ProductDescPage/ProductDescPage.styled";
 
 const modalRoot = document.querySelector("#modal-root");
@@ -66,7 +69,7 @@ class OrderModal extends React.Component {
     return createPortal(
       <Backdrop>
         <Modal>
-          <CloseButton onClick={() => toggleOrderModal()}></CloseButton>
+          <CloseButton onClick={() => toggleOrderModal()}>CLOSE</CloseButton>
           <Query
             query={queries.PRODUCT_QUERY}
             variables={{ prod: this.props.productId }}
@@ -76,7 +79,7 @@ class OrderModal extends React.Component {
               return (
                 <ProductOrderContainer>
                   <form onSubmit={this.submitHandler}>
-                    <h4>{data.product.name}</h4>
+                    <ProductName>{data.product.name}</ProductName>
                     <div>
                       {data.product.attributes.map((attribute, idx) => {
                         return (
@@ -104,17 +107,18 @@ class OrderModal extends React.Component {
                                 } else
                                   return (
                                     <React.Fragment key={idx}>
-                                      <label>
-                                        <input
-                                          type="radio"
-                                          name={attribute.name}
-                                          id={item.id}
-                                          value={item.displayValue}
-                                          onClick={this.selectAttribute}
-                                          required
-                                        />
-                                        {item.displayValue}
-                                      </label>
+                                      <CustomInput
+                                        type="radio"
+                                        name={attribute.name}
+                                        id={attribute.id + item.id}
+                                        value={item.displayValue}
+                                        onClick={this.selectAttribute}
+                                        required
+                                      />
+                                      <CustomLabel
+                                        content={item.displayValue}
+                                        htmlFor={attribute.id + item.id} // because attribute id's from backend repeated ("yes" "no")
+                                      />
                                     </React.Fragment>
                                   );
                               })}

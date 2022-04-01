@@ -16,18 +16,7 @@ import {
 } from "./Navbar.styled";
 import Logo from "../Logo";
 import CartModalIcon from "../CartModalIcon";
-//Styles for navLinks described here
-
-const linkStyle = {
-  base: {
-    color: "#000000",
-    textDecoration: "none",
-  },
-  active: {
-    color: "#5ECE7B",
-    textDecoration: "underline",
-  },
-};
+import styles from "./navlink.module.css";
 
 class Navbar extends React.Component {
   state = {
@@ -51,8 +40,8 @@ class Navbar extends React.Component {
                     return (
                       <ListItem key={idx}>
                         <NavLink
-                          style={linkStyle.base}
-                          activeStyle={linkStyle.active}
+                          className={styles.base}
+                          activeClassName={styles.active}
                           to={category.name}
                           onClick={() => this.props.changeFilter(category.name)}
                         >

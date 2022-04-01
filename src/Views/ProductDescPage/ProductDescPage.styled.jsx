@@ -95,7 +95,7 @@ const CustomRadio = styled.label`
   }
 
   &:not(:first-child) {
-    margin-left: 10px;
+    margin-left: 8px;
   }
 `;
 
@@ -119,14 +119,20 @@ const CustomLabel = styled.label`
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
+    padding: 0px 5px;
 
-    width: 70px;
+    min-width: 70px;
     height: 40px;
 
     background-color: #fff;
     border: 1px solid black;
 
     transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
   }
 
   /* &::after {
@@ -141,12 +147,13 @@ const CustomLabel = styled.label`
     left: -36px;
   } */
 
-  &:not(:first-child) {
-    margin-left: 10px;
+  &:not(:last-child) {
+    margin-right: 10px;
   }
 `;
 
 const CustomInput = styled.input`
+  margin: 0px;
   appearance: none;
   position: absolute;
   &:checked + ${CustomLabel}::before {
