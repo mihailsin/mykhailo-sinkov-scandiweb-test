@@ -35,6 +35,22 @@ const Button = styled.button`
     background-color: #5ece7b;
   }
 `;
+const SpanButton = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 45%;
+  height: 30px;
+  border: 1px solid #111;
+  background-color: transparent;
+  color: #111;
+  &:hover,
+  focus {
+    color: #fff;
+    background-color: #5ece7b;
+  }
+`;
 
 const ItemQuantityChip = styled.span`
   display: inline-block;
@@ -150,4 +166,5 @@ export {
   Button,
   SwatchContainer,
   AttributeParagraph,
+  SpanButton,
 };

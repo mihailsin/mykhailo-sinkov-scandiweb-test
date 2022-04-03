@@ -16,6 +16,7 @@ import {
   Button,
   SwatchContainer,
   AttributeParagraph,
+  SpanButton,
 } from "./CartModal.styled";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -34,6 +35,20 @@ class CartModal extends React.Component {
         "quantity can not be less then 1! if you want to get rid of it - remove product!"
       );
   };
+
+  handleKeyDown = (e) => {
+    if (e.code === "Escape") {
+      this.props.toggleModal();
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.handleKeyDown);
+  }
   render() {
     const products = this.props.products;
     const omittedKeys = [
@@ -47,10 +62,23 @@ class CartModal extends React.Component {
     return (
       <RelativeContainer>
         <ButtonsContainer>
-          <Button>
-            <Link to="/cart">VIEW BAG</Link>
-          </Button>
-          <Button>CHECK OUT</Button>
+          <SpanButton>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              onClick={() => this.props.toggleModal()}
+              to="/cart"
+            >
+              VIEW BAG
+            </Link>
+          </SpanButton>
+
+          <Button onClick={() => this.props.toggleModal()}>CHECK OUT</Button>
         </ButtonsContainer>
         <div>
           {products.map((product, idx) => {
@@ -107,7 +135,7 @@ class CartModal extends React.Component {
                       }
                       type="button"
                     >
-                      Remove from Cart
+                      Delete Product
                     </RemoveButton>
                   </ImageContainer>
                 </InteractiveContainer>

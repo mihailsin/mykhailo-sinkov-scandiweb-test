@@ -96,7 +96,7 @@ class Cart extends React.Component {
                       }
                       type="button"
                     >
-                      Remove from Cart
+                      Delete Product
                     </RemoveButton>
                   </ImageContainer>
                 </InteractiveContainer>

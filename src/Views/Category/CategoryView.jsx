@@ -47,7 +47,6 @@ class CategoryView extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("unmounted");
     this.controller.abort();
     this.setState({ data: [] });
   }

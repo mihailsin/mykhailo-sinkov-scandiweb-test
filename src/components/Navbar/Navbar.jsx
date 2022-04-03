@@ -86,7 +86,9 @@ class Navbar extends React.Component {
                   <Chip>{this.props.products.length}</Chip>
                   <CartModalIcon />
                 </CartButton>
-                {this.state.isModalOpen && <CartModal />}
+                {this.state.isModalOpen && (
+                  <CartModal toggleModal={this.toggleModal} />
+                )}
               </ListItem>
             </List>
           </FlexContainer>

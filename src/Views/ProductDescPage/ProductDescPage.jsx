@@ -21,6 +21,7 @@ import {
   CustomInput,
   CustomLabel,
 } from "./ProductDescPage.styled";
+import { ProductImg } from "../../components/Card/Card.styled";
 import { nanoid } from "nanoid";
 
 const sanitizer = dompurify.sanitize;
@@ -66,7 +67,6 @@ class ProductDescPage extends React.Component {
   }
   render() {
     const productsInCart = this.props.productsInCart;
-    console.log(productsInCart);
     return (
       <Div>
         <Container>
@@ -86,7 +86,7 @@ class ProductDescPage extends React.Component {
                     ))}
                   </PreviewImgContainer>
                   <MainImgContainer>
-                    <Img src={this.state.image} alt="product" />
+                    <ProductImg image={this.state.image} alt="product" />
                   </MainImgContainer>
                   <ProductOrderContainer>
                     <form onSubmit={this.submitHandler}>
@@ -149,13 +149,18 @@ class ProductDescPage extends React.Component {
                           );
                         }
                       })}
-                      <SubmitButton type="submit">ADD TO CART</SubmitButton>
+                      {data.product.inStock && (
+                        <SubmitButton type="submit">ADD TO CART</SubmitButton>
+                      )}
 
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sanitizer(data.product.description),
                         }}
                       ></p>
+                      {!data.product.inStock && (
+                        <h2>Product is not in stock.</h2>
+                      )}
                     </form>
                   </ProductOrderContainer>
                 </FlexContainer>

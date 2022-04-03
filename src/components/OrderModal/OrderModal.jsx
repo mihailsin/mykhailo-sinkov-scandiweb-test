@@ -44,7 +44,22 @@ class OrderModal extends React.Component {
     toggleOrderModal();
   };
 
+  handleClick = (e) => {
+    const toggleOrderModal = this.props.togglemodal;
+    if (e.target === e.currentTarget) {
+      toggleOrderModal();
+    }
+  };
+
+  handleKeyDown = (e) => {
+    const toggleOrderModal = this.props.togglemodal;
+    if (e.code === "Escape") {
+      toggleOrderModal();
+    }
+  };
+
   componentDidMount() {
+    window.addEventListener("keydown", this.handleKeyDown);
     client
       .query({
         query: queries.PRODUCT_QUERY,
@@ -64,10 +79,14 @@ class OrderModal extends React.Component {
         })
       );
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.handleKeyDown);
+  }
   render() {
     const toggleOrderModal = this.props.togglemodal;
     return createPortal(
-      <Backdrop>
+      <Backdrop onClick={this.handleClick}>
         <Modal>
           <CloseButton onClick={() => toggleOrderModal()}>CLOSE</CloseButton>
           <Query
@@ -137,7 +156,10 @@ class OrderModal extends React.Component {
                         );
                       }
                     })}
-                    <SubmitButton type="submit">ADD TO CART</SubmitButton>
+                    {data.product.inStock && (
+                      <SubmitButton type="submit">ADD TO CART</SubmitButton>
+                    )}
+                    {!data.product.inStock && <h2>Product is not in stock.</h2>}
                   </form>
                 </ProductOrderContainer>
               );
