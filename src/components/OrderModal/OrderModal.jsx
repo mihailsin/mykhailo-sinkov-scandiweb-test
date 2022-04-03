@@ -8,11 +8,6 @@ import { addProductInCart } from "../../redux/actions";
 import { client } from "../..";
 import { nanoid } from "@reduxjs/toolkit";
 import {
-  PreviewImgContainer,
-  ImgWrapper,
-  Img,
-  FlexContainer,
-  MainImgContainer,
   ProductOrderContainer,
   SubmitButton,
   RadioButton,
@@ -159,7 +154,7 @@ class OrderModal extends React.Component {
                     {data.product.inStock && (
                       <SubmitButton type="submit">ADD TO CART</SubmitButton>
                     )}
-                    {!data.product.inStock && <h2>Product is not in stock.</h2>}
+                    {!data.product.inStock && <h2>Product is out of stock.</h2>}
                   </form>
                 </ProductOrderContainer>
               );

@@ -43,6 +43,7 @@ class Cart extends React.Component {
       <Container>
         <div>
           <Header>CART</Header>
+          {products.length === 0 && <h2>Your cart is empty right now.</h2>}
           {products.map((product, idx) => {
             return (
               <ItemContainer key={idx}>

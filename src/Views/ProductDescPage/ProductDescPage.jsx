@@ -159,7 +159,7 @@ class ProductDescPage extends React.Component {
                         }}
                       ></p>
                       {!data.product.inStock && (
-                        <h2>Product is not in stock.</h2>
+                        <h2>Product is out of stock.</h2>
                       )}
                     </form>
                   </ProductOrderContainer>

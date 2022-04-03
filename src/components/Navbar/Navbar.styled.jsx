@@ -57,4 +57,38 @@ const Filter = styled.button`
   }
 `;
 
-export { List, ListItem, FlexContainer, CartButton, Nav, Filter, Chip };
+const SelectDiv = styled.div`
+  &::after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #111 transparent transparent transparent;
+    bottom: 10px;
+    left: 30px;
+  }
+`;
+
+const Select = styled.select`
+  cursor: pointer;
+  appearance: none;
+  position: relative;
+  border: none;
+  background-color: transparent;
+  width: 40px;
+`;
+
+export {
+  List,
+  ListItem,
+  FlexContainer,
+  CartButton,
+  Nav,
+  Filter,
+  Chip,
+  Select,
+  SelectDiv,
+};

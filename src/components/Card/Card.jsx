@@ -6,7 +6,6 @@ import {
   CardContainer,
   Thumb,
   Info,
-  Img,
   Item,
   PriceParagraph,
   TextParagraph,

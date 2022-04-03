@@ -3,11 +3,9 @@ import Gallery from "../../components/Gallery";
 import Card from "../../components/Card";
 import Container from "../../components/Container";
 import { Header } from "./CategoryView.styled";
-import { Query } from "@apollo/client/react/components";
 import queries from "../../queries";
 import { connect } from "react-redux";
 import { client } from "../..";
-import { Link } from "react-router-dom";
 import OrderModal from "../../components/OrderModal";
 
 class CategoryView extends React.Component {
@@ -69,25 +67,6 @@ class CategoryView extends React.Component {
               );
             }
           )}
-          {/* <Query
-            query={queries.OPTIONAL_QUERY}
-            variables={{ cat: this.props.match.params.category }}
-          >
-            {({ data, loading, error }) => {
-              if (loading) return "loading...";
-              if (error) return "void";
-              return data.category.products.map(
-                ({ name, brand, gallery, prices, id }, idx) => {
-                  return (
-                    <Card
-                      key={idx}
-                      product={{ name, gallery, brand, prices, id }}
-                    />
-                  );
-                }
-              );
-            }}
-          </Query> */}
         </Gallery>
 
         {showOrderModal && (

@@ -25,6 +25,7 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "../../redux/actions";
+
 class CartModal extends React.Component {
   decrementProductsQuantity = (id, quantity) => {
     const decrement = this.props.decrementQuantity;
@@ -81,6 +82,7 @@ class CartModal extends React.Component {
           <Button onClick={() => this.props.toggleModal()}>CHECK OUT</Button>
         </ButtonsContainer>
         <div>
+          {products.length === 0 && <h2>Your cart is empty right now.</h2>}
           {products.map((product, idx) => {
             return (
               <ItemContainer key={idx}>

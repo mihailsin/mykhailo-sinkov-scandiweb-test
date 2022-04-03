@@ -13,6 +13,8 @@ import {
   CartButton,
   Nav,
   Chip,
+  Select,
+  SelectDiv,
 } from "./Navbar.styled";
 import Logo from "../Logo";
 import CartModalIcon from "../CartModalIcon";
@@ -56,30 +58,27 @@ class Navbar extends React.Component {
             <Logo />
             <List>
               <ListItem>
-                <select
-                  id="currency"
-                  name="currency"
-                  value={this.props.currency}
-                  onChange={(e) => this.props.changeCurrency(e.target.value)}
-                >
-                  <Query query={queries.CURRENCY_QUERY}>
-                    {({ data, loading }) => {
-                      if (loading) return "loading...";
-                      return data.currencies.map(({ symbol, label }, idx) => {
-                        return (
-                          <option
-                            key={idx}
-                            value={label}
-                            // selected={label === this.props.currency}
-                          >
-                            {/* {symbol} &nbsp; */}
-                            {label}
-                          </option>
-                        );
-                      });
-                    }}
-                  </Query>
-                </select>
+                <SelectDiv>
+                  <Select
+                    id="currency"
+                    name="currency"
+                    defaultValue={this.props.currency}
+                    onChange={(e) => this.props.changeCurrency(e.target.value)}
+                  >
+                    <Query query={queries.CURRENCY_QUERY}>
+                      {({ data, loading }) => {
+                        if (loading) return "loading...";
+                        return data.currencies.map(({ symbol, label }, idx) => {
+                          return (
+                            <option key={idx} value={label}>
+                              {label}
+                            </option>
+                          );
+                        });
+                      }}
+                    </Query>
+                  </Select>
+                </SelectDiv>
               </ListItem>
               <ListItem>
                 <CartButton type="button" onClick={this.toggleModal}>
